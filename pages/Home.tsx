@@ -10,6 +10,7 @@ import {
   Heading,
   VStack,
   Icon,
+  ScrollView,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { Animated, StatusBar } from "react-native";
@@ -87,20 +88,8 @@ export default function App() {
         bottom={0}
         zIndex={69}
       >
-        <Animated.ScrollView
-          showsVerticalScrollIndicator={false}
-          // onScroll={(e) => console.log(e.nativeEvent.contentOffset.y)}
-          scrollEventThrottle={16}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: { y: scrollY },
-                },
-              },
-            ],
-            { useNativeDriver: true }
-          )}
+        <ScrollView
+          showsVerticalScrollIndicator={false}        
         >
           <Flex
             flex={1}
@@ -111,9 +100,9 @@ export default function App() {
             pb={10}
           >
             <Features />
-            <Transactions scrollY={scrollY} />
+            <Transactions />
           </Flex>
-        </Animated.ScrollView>
+        </ScrollView>
       </Box>
     </Flex>
   );
