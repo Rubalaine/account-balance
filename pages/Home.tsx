@@ -1,7 +1,5 @@
 import React, { useRef } from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import {
-  NativeBaseProvider,
   Box,
   Text,
   Flex,
@@ -16,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Animated, StatusBar } from "react-native";
 import Features from "../components/Features";
 import Transactions from "../components/Transactions";
+import Transaction from "../components/Transation";
 interface InfoProps {
   label: string;
   iconName: string;
@@ -88,8 +87,20 @@ export default function App() {
         bottom={0}
         zIndex={69}
       >
-        <ScrollView
-          showsVerticalScrollIndicator={false}        
+        <Animated.ScrollView
+          showsVerticalScrollIndicator={false}
+          // onScroll={(e) => console.log(e.nativeEvent.contentOffset.y)}
+          scrollEventThrottle={16}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: { y: scrollY },
+                },
+              },
+            ],
+            { useNativeDriver: true }
+          )}
         >
           <Flex
             flex={1}
@@ -100,9 +111,52 @@ export default function App() {
             pb={10}
           >
             <Features />
-            <Transactions />
+            <Transactions>
+              <Transaction
+                color="blue"
+                iconName="ios-duplicate"
+                label="Money from Luís"
+                much={336}
+                id={0}
+              />
+              <Transaction
+                color="green"
+                iconName="ios-phone-portrait"
+                label="Phone"
+                much={-100}
+                id={1}
+              />
+              <Transaction
+                color="amber"
+                iconName="ios-wifi-sharp"
+                label="Data"
+                much={-250}
+                id={2}
+              />
+              <Transaction
+                color="blue"
+                iconName="ios-duplicate"
+                label="Money from Luís"
+                much={336}
+                id={3}
+              />
+              <Transaction
+                color="rose"
+                iconName="ios-heart"
+                label="BPJS"
+                much={-123}
+                id={4}
+              />
+              <Transaction
+                color="amber"
+                iconName="ios-flash"
+                label="PLN"
+                much={3600}
+                id={5}
+              />
+            </Transactions>
           </Flex>
-        </ScrollView>
+        </Animated.ScrollView>
       </Box>
     </Flex>
   );
