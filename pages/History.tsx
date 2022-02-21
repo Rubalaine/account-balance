@@ -2,18 +2,15 @@ import React from "react";
 import { Center, Flex, ScrollView, Text } from "native-base";
 import Transactions from "../components/Transactions";
 import Transaction from "../components/Transation";
+import NavigationControl from "../components/NavigationControl";
 
 const History = () => {
   return (
     <>
-      <Flex flex={1} backgroundColor="blue.50" >
+      <Flex flex={1} >
         <ScrollView roundedTop={32} showsVerticalScrollIndicator={false}>
-          <Center p={16} backgroundColor="indigo.500">
-            <Text textTransform="uppercase" fontWeight="bold" color="white">
-              History
-            </Text>
-          </Center>
-          <Flex  p="20px" pb={10}>
+          <Flex p="20px" pb={10}>
+            <NavigationControl pageName="Notification" />
             <Transactions>
               <Transaction
                 color="blue"
